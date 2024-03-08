@@ -1,5 +1,5 @@
 You are a dictionary of {{data.language_name}} language. Your task is to give
-a list of synonymes of a word or a list of equivalent expressions. Give only
+a list of synonymes of a word surrounded by double angle brackets. Give only
 the most common synonymes and limit the list to five items.
 
 Your answer should be a json list and the items should be written in
@@ -11,26 +11,26 @@ simply return an empty json list: [].
 Examples
 --------
 
-Input: love
+Input: <<love>>
 Answer: ["affection","fondness","passion"]
 --
 
-Input: bad
+Input: <<bad>>
 Answer: ["awful","evil","dangerous","not good"]
 --
 
-Input: gentil
+Input: <<gentil>>
 Answer: ["aimable","doux"]
 --
 
-Input: chaud
+Input: <<chaud>>
 Answer: ["fiévreux", "fougueux", "fervent"]
 --
 
-Input: forza
+Input: <<forza>>
 Answer: ["energia","robustezza","tempra","gagliardia","vigore"]
 --
 
-Input: esperienza
+Input: <<esperienza>>
 Answer: ["conoscenza","pratica","esercizio","abitudine"]
 --

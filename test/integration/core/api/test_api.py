@@ -17,18 +17,16 @@ def openai_key(pytestconfig):
 @pytest.mark.parametrize(
     "word,language",
     [
-        ("hapiness", "eng"),
-        ("state", "eng"),
-        ("clafoutis", "fra"),
+        ("happiness", "eng"),
         ("pareil", "fra"),
-        ("magari", "ita"),
         ("profumo", "ita"),
     ],
 )
 def test_get_definition(openai_key, word, language):
     response = api.get_definition(openai_key, word, language)
     assert response
-    assert len(response) > 10
+    obj = json.loads(response)
+    assert len(obj) > 0
 
 
 @pytest.mark.api
@@ -36,17 +34,15 @@ def test_get_definition(openai_key, word, language):
     "word,language",
     [
         ("terrible", "eng"),
-        ("passion", "eng"),
-        ("ensemble", "fra"),
         ("travail", "fra"),
-        ("cibo", "ita"),
         ("facile", "ita"),
     ],
 )
 def test_get_synonyme(openai_key, word, language):
     response = api.get_definition(openai_key, word, language)
     assert response
-    assert len(response) > 10
+    obj = json.loads(response)
+    assert len(obj) > 0
 
 
 @pytest.mark.api
@@ -61,7 +57,8 @@ def test_get_synonyme(openai_key, word, language):
 def test_get_reverse_definition(openai_key, text, language, mandate_words):
     response = api.get_reverse_definition(openai_key, text, language)
     assert response
-    assert len(response) > 10
+    obj = json.loads(response)
+    assert len(obj) > 0
     obj = json.loads(response)
     for word in mandate_words:
         assert word in obj

@@ -29,7 +29,7 @@ def _call_openai(
         return completion.choices[0].message.content
 
 
-def get_definition(openai_key: str, word: str, language_alpha3: str = "eng") -> str:
+def get_definition(openai_key: str, word: str, language_alpha3) -> str:
     """
     Get the definition of a word.
 
@@ -45,7 +45,7 @@ def get_definition(openai_key: str, word: str, language_alpha3: str = "eng") -> 
     return text_response
 
 
-def get_synonyme(openai_key: str, word: str, language_alpha3: str = "eng") -> str:
+def get_synonyme(openai_key: str, word: str, language_alpha3) -> str:
     """
     Get the synonymes of a word.
 
@@ -61,9 +61,7 @@ def get_synonyme(openai_key: str, word: str, language_alpha3: str = "eng") -> st
     return text_response
 
 
-def get_reverse_definition(
-    openai_key: str, text: str, language_alpha3: str = "eng"
-) -> str:
+def get_reverse_definition(openai_key: str, text: str, language_alpha3: str) -> str:
     """
     Get a list of words that best encode the intention of a text.
 
