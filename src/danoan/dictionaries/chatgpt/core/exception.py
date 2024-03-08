@@ -1,0 +1,2 @@
+class OpenAIEmptyResponse(Exception):
+    pass
