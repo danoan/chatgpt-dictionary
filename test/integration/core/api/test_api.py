@@ -65,3 +65,19 @@ def test_get_reverse_definition(openai_key, text, language, mandate_words):
     obj = json.loads(response)
     for word in mandate_words:
         assert word in obj
+
+
+@pytest.mark.api
+@pytest.mark.parametrize(
+    "word,language",
+    [
+        ("notes", "eng"),
+        ("manteau", "fra"),
+        ("pragmatico", "ita"),
+    ],
+)
+def test_get_usage_examples(openai_key, word, language):
+    response = api.get_usage_examples(openai_key, word, language)
+    assert response
+    obj = json.loads(response)
+    assert len(obj) > 0

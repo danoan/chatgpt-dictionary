@@ -77,3 +77,19 @@ def get_reverse_definition(
         raise exception.OpenAIEmptyResponse()
 
     return text_response
+
+
+def get_usage_examples(openai_key: str, word: str, language_alpha3: str) -> str:
+    """
+    Get a list of sentences in which the word is used with their different meanings.
+
+    The response is a string which the content is a json list with strings, each one representing a word.
+    """
+    prompt_filename = "get-usage-examples.txt"
+    language = pycountry.languages.get(alpha_3=language_alpha3)
+    data = {"language_name": language.name}
+    text_response = _call_openai(openai_key, prompt_filename, data, word)
+    if not text_response:
+        raise exception.OpenAIEmptyResponse()
+
+    return text_response
