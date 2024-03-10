@@ -1,4 +1,5 @@
-from danoan.word_guru.cli.commands import dictionary
+from danoan.word_guru.cli import utils
+from danoan.word_guru.cli.commands import dictionary, setup
 
 import argparse
 
@@ -18,9 +19,14 @@ def extend_parser(subcommand_action=None):
     else:
         parser = argparse.ArgumentParser(description)
 
+    parser.add_argument(
+        "--openai-key",
+        help="The OpenAI key id used to authenticate requests to OpenAI API.",
+    )
+
     subparser_action = parser.add_subparsers()
 
-    list_of_commands = [dictionary]
+    list_of_commands = [dictionary, setup]
     for command in list_of_commands:
         command.extend_parser(subparser_action)
 
@@ -28,11 +34,25 @@ def extend_parser(subcommand_action=None):
 
 
 def main():
-    parser = extend_parser()
+    config_file_params = {}
+    try:
+        configuration_file = utils.get_configuration_file()
+        config_file_params = configuration_file.__dict__
+    except:
+        pass
 
+    parser = extend_parser()
     args = parser.parse_args()
+
+    input_params = vars(args)
+    for key, value in config_file_params.items():
+        if key not in input_params:
+            input_params[key] = value
+        elif input_params[key] is None:
+            input_params[key] = value
+
     if "func" in args:
-        args.func(**vars(args))
+        args.func(**input_params)
     elif "subcommand_help" in args:
         args.subcommand_help()
     else:

@@ -23,10 +23,6 @@ def extend_parser(subcommand_action=None):
     else:
         parser = argparse.ArgumentParser(description)
 
-    parser.add_argument(
-        "openai_key",
-        help="The organization id used to authenticate requests to OpeanAI API.",
-    )
     subparser_action = parser.add_subparsers()
 
     list_of_commands = [
@@ -37,6 +33,8 @@ def extend_parser(subcommand_action=None):
     ]
     for command in list_of_commands:
         command.extend_parser(subparser_action)
+
+    parser.set_defaults(subcommand_help=parser.print_help)
 
     return parser
 
