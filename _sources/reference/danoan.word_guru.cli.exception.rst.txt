@@ -1,0 +1,7 @@
+danoan.word\_guru.cli.exception module
+======================================
+
+.. automodule:: danoan.word_guru.cli.exception
+   :members:
+   :undoc-members:
+   :show-inheritance:

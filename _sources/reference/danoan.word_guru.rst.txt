@@ -1,0 +1,13 @@
+danoan.word\_guru namespace
+===========================
+
+.. py:module:: danoan.word_guru
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   danoan.word_guru.cli
+   danoan.word_guru.core

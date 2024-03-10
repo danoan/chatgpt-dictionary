@@ -1,0 +1,26 @@
+danoan.word\_guru.cli package
+=============================
+
+.. automodule:: danoan.word_guru.cli
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   danoan.word_guru.cli.commands
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   danoan.word_guru.cli.cli
+   danoan.word_guru.cli.exception
+   danoan.word_guru.cli.model
+   danoan.word_guru.cli.utils

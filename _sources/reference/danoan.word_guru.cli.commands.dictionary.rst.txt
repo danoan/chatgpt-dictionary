@@ -1,0 +1,7 @@
+danoan.word\_guru.cli.commands.dictionary module
+================================================
+
+.. automodule:: danoan.word_guru.cli.commands.dictionary
+   :members:
+   :undoc-members:
+   :show-inheritance:

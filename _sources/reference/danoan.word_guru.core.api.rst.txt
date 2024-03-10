@@ -1,0 +1,7 @@
+danoan.word\_guru.core.api module
+=================================
+
+.. automodule:: danoan.word_guru.core.api
+   :members:
+   :undoc-members:
+   :show-inheritance:

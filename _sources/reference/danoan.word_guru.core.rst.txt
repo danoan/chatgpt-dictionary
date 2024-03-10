@@ -1,0 +1,16 @@
+danoan.word\_guru.core package
+==============================
+
+.. automodule:: danoan.word_guru.core
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   danoan.word_guru.core.api
+   danoan.word_guru.core.exception

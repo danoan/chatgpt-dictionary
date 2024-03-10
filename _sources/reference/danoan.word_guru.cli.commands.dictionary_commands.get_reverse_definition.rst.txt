@@ -1,0 +1,7 @@
+danoan.word\_guru.cli.commands.dictionary\_commands.get\_reverse\_definition module
+===================================================================================
+
+.. automodule:: danoan.word_guru.cli.commands.dictionary_commands.get_reverse_definition
+   :members:
+   :undoc-members:
+   :show-inheritance:

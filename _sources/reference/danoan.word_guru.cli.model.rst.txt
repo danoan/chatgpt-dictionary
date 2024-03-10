@@ -1,0 +1,7 @@
+danoan.word\_guru.cli.model module
+==================================
+
+.. automodule:: danoan.word_guru.cli.model
+   :members:
+   :undoc-members:
+   :show-inheritance:
