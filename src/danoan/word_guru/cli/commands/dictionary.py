@@ -3,6 +3,7 @@ from danoan.word_guru.cli.commands.dictionary_commands import (
     get_synonyme,
     get_reverse_definition,
     get_usage_examples,
+    get_pos_tag,
 )
 
 import argparse
@@ -30,6 +31,7 @@ def extend_parser(subcommand_action=None):
         get_synonyme,
         get_reverse_definition,
         get_usage_examples,
+        get_pos_tag,
     ]
     for command in list_of_commands:
         command.extend_parser(subparser_action)

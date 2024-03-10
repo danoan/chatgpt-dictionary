@@ -1,4 +1,4 @@
-from danoan.word_guru.cli import utils
+from danoan.word_guru.cli import exception, utils
 
 import argparse
 
@@ -7,12 +7,12 @@ def init():
     try:
         utils.ensure_environment_variable_exist()
         utils.ensure_configuration_file_exist()
-    except utils.EnvironmentVariableIsNotSet as ex:
+    except exception.EnvironmentVariableIsNotSet as ex:
         print(
             f"The environment variable {ex.environment_variable} is not set. Please define this variable. It should point to a folder where configuration files will be stored."
         )
         exit(1)
-    except utils.ConfigurationFileDoesNotExist as ex:
+    except exception.ConfigurationFileDoesNotExist as ex:
         print(f"Could not find {ex.configuration_filepath}. Creating an empty one.")
         ex.configuration_filepath.parent.mkdir(parents=True, exist_ok=True)
         ex.configuration_filepath.touch()
