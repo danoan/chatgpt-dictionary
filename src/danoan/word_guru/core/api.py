@@ -13,7 +13,6 @@ def _call_openai(
 ):
     client = OpenAI(api_key=openai_key)
     prompt = env.get_template(prompt_filename).render(data=prompt_data)
-
     completion = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
@@ -100,6 +99,40 @@ def get_pos_tag(openai_key: str, word: str, language_alpha3: str) -> str:
     The response is a string which the content is a json list with strings, each one representing a pos tag.
     """
     prompt_filename = "get-pos-tag.txt"
+    language = pycountry.languages.get(alpha_3=language_alpha3)
+    data = {"language_name": language.name}
+    text_response = _call_openai(openai_key, prompt_filename, data, word)
+    if not text_response:
+        raise exception.OpenAIEmptyResponse()
+
+    return text_response
+
+
+def get_translation(
+    openai_key: str, word: str, from_language_alpha3: str, to_language_alpha3: str
+) -> str:
+    """
+    Get the translation of a word or expression.
+    """
+    prompt_filename = "get-translation.txt"
+    from_language = pycountry.languages.get(alpha_3=from_language_alpha3)
+    to_language = pycountry.languages.get(alpha_3=to_language_alpha3)
+    data = {
+        "from_language_name": from_language.name,
+        "to_language_name": to_language.name,
+    }
+    text_response = _call_openai(openai_key, prompt_filename, data, word)
+    if not text_response:
+        raise exception.OpenAIEmptyResponse()
+
+    return text_response
+
+
+def get_correction(openai_key: str, word: str, language_alpha3: str) -> str:
+    """
+    Get the corrected version of a text.
+    """
+    prompt_filename = "get-correction.txt"
     language = pycountry.languages.get(alpha_3=language_alpha3)
     data = {"language_name": language.name}
     text_response = _call_openai(openai_key, prompt_filename, data, word)

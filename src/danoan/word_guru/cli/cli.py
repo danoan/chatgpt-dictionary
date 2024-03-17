@@ -1,5 +1,5 @@
 from danoan.word_guru.cli import utils
-from danoan.word_guru.cli.commands import dictionary, setup
+from danoan.word_guru.cli.commands import copywriter, dictionary, translate, setup
 
 import argparse
 
@@ -26,7 +26,7 @@ def extend_parser(subcommand_action=None):
 
     subparser_action = parser.add_subparsers()
 
-    list_of_commands = [dictionary, setup]
+    list_of_commands = [copywriter, dictionary, translate, setup]
     for command in list_of_commands:
         command.extend_parser(subparser_action)
 
