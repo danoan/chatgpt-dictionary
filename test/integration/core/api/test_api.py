@@ -38,7 +38,7 @@ def test_get_definition(openai_key, word, language):
         ("facile", "ita"),
     ],
 )
-def test_get_synonyme(openai_key, word, language):
+def test_get_synonym(openai_key, word, language):
     response = api.get_definition(openai_key, word, language)
     assert response
     obj = json.loads(response)

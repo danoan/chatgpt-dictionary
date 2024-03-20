@@ -11,19 +11,19 @@ handler.setLevel(logging.INFO)
 logger.addHandler(handler)
 
 
-def get_synonyme(openai_key: str, word: str, language: str, *args, **kwargs):
+def get_synonym(openai_key: str, word: str, language: str, *args, **kwargs):
     """
-    Get synonymes of a word in the given language.
+    Get synonyms of a word in the given language.
     """
     try:
-        print(api.get_synonyme(openai_key, word, language))
+        print(api.get_synonym(openai_key, word, language))
     except exception.OpenAIEmptyResponse:
         logger.error("OpeanAI returned an empty response.")
 
 
 def extend_parser(subcommand_action=None):
-    command_name = "get-synonyme"
-    description = get_synonyme.__doc__
+    command_name = "get-synonym"
+    description = get_synonym.__doc__
     help = description.split(".")[0] if description else ""
 
     if subcommand_action:
@@ -40,12 +40,12 @@ def extend_parser(subcommand_action=None):
             formatter_class=argparse.RawDescriptionHelpFormatter,
         )
 
-    parser.add_argument("word", help="The word you ask for synonymes.")
+    parser.add_argument("word", help="The word you ask for synonyms.")
     parser.add_argument(
         "language", help="The IETF 639-3 code of the language. E.g. eng"
     )
 
-    parser.set_defaults(func=get_synonyme, subcommand_help=parser.print_help)
+    parser.set_defaults(func=get_synonym, subcommand_help=parser.print_help)
 
     return parser
 

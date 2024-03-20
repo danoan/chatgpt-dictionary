@@ -44,13 +44,13 @@ def get_definition(openai_key: str, word: str, language_alpha3) -> str:
     return text_response
 
 
-def get_synonyme(openai_key: str, word: str, language_alpha3) -> str:
+def get_synonym(openai_key: str, word: str, language_alpha3) -> str:
     """
-    Get the synonymes of a word.
+    Get the synonyms of a word.
 
-    The response is string which content is a json list with strings, each one representing a synonyme.
+    The response is string which content is a json list with strings, each one representing a synonym.
     """
-    prompt_filename = "get-synonyme.txt"
+    prompt_filename = "get-synonym.txt"
     language = pycountry.languages.get(alpha_3=language_alpha3)
     data = {"language_name": language.name}
     text_response = _call_openai(openai_key, prompt_filename, data, word)

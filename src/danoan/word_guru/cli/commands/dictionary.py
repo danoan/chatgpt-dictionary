@@ -1,6 +1,6 @@
 from danoan.word_guru.cli.commands.dictionary_commands import (
     get_definition,
-    get_synonyme,
+    get_synonym,
     get_reverse_definition,
     get_usage_examples,
     get_pos_tag,
@@ -28,7 +28,7 @@ def extend_parser(subcommand_action=None):
 
     list_of_commands = [
         get_definition,
-        get_synonyme,
+        get_synonym,
         get_reverse_definition,
         get_usage_examples,
         get_pos_tag,
