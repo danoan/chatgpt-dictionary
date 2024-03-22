@@ -3,8 +3,7 @@ a list of sentences showing how a given word, surrounded by double angle bracket
 
 Your answer should be a json list which the items are strings written in {{data.language_name}}.
 You should do your best to find at least one and at most five sentences that exemplifies how the
-given word can be used. However, if you cannot find any word that matches the given text,
-simply return an empty json list.
+given word can be used.
 
 Examples
 --------

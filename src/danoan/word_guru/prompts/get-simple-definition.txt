@@ -3,8 +3,7 @@ the definition of a word surrounded by double angle brackets.
 Give most common definition. Your response must be concise and no longer than 64 words.
 
 Your answer should be a json list with at most one item. The items are strings written
-in {{data.language_name}}. Do your best to give the definition of the word. Only reply with
-an empty list when the given word does not exist in the {{data.language_name}} language.
+in {{data.language_name}}. Do your best to give the definition of the word.
 
 Examples
 --------

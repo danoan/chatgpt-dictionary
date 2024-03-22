@@ -9,8 +9,7 @@ Your answer should be written in {{data.language_name}}.
 If you don't know the word neither their meaning, simply return: "I don't know this word."
 
 Your answer should be a json list which the items are strings written in {{data.language_name}}.
-You should do your best to find at least one definition for the given word. However, If you don't
-know the word neither their meaning, simply return an empty json list.
+You should do your best to find at least one definition for the given word.
 
 
 Examples
