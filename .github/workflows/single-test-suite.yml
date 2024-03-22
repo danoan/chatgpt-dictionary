@@ -25,7 +25,7 @@ jobs:
         python -m pip install --upgrade pip && pip install tox
     - name: Linting check
       run: |
-        tox -e format
+        tox -e lint
   check-type:
     runs-on: ubuntu-latest
     steps:
