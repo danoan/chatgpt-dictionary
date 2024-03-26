@@ -29,4 +29,4 @@ $ word-guru dictionary get-reverse-definition "that feeling of accomplishment af
 
 ## Contributing
 
-Please reference to our [contribution](http://danoan.github.io/word-guru/contributing) and [code-of-conduct]((http://danoan.github.io/word-guru/code-of-conduct.md)) guidelines.
+Please reference to our [contribution](http://danoan.github.io/word-guru/contributing) and [code-of-conduct](http://danoan.github.io/word-guru/code-of-conduct) guidelines.
