@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" data-content_root="../../../../../../">
+<html class="writer-html5" lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,9 +15,9 @@
   
         <script src="../../../../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../../../../_static/documentation_options.js?v=01f34227"></script>
+        <script data-url_root="../../../../../../" id="documentation_options" src="../../../../../../_static/documentation_options.js?v=2389946f"></script>
         <script src="../../../../../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../../../../_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
         <script>mermaid.initialize({startOnLoad:true});</script>
     <script src="../../../../../../_static/js/theme.js"></script>
@@ -95,9 +95,7 @@
 <span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">handler</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="get_definition">
-<a class="viewcode-back" href="../../../../../../reference/danoan.word_guru.cli.commands.dictionary_commands.get_definition.html#danoan.word_guru.cli.commands.dictionary_commands.get_definition.get_definition">[docs]</a>
-<span class="k">def</span> <span class="nf">get_definition</span><span class="p">(</span><span class="n">openai_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">language</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="get_definition"><a class="viewcode-back" href="../../../../../../reference/danoan.word_guru.cli.commands.dictionary_commands.get_definition.html#danoan.word_guru.cli.commands.dictionary_commands.get_definition.get_definition">[docs]</a><span class="k">def</span> <span class="nf">get_definition</span><span class="p">(</span><span class="n">openai_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">language</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get the definition of a word in the given language.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -107,10 +105,7 @@
         <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;OpeanAI returned an empty response.&quot;</span><span class="p">)</span></div>
 
 
-
-<div class="viewcode-block" id="extend_parser">
-<a class="viewcode-back" href="../../../../../../reference/danoan.word_guru.cli.commands.dictionary_commands.get_definition.html#danoan.word_guru.cli.commands.dictionary_commands.get_definition.extend_parser">[docs]</a>
-<span class="k">def</span> <span class="nf">extend_parser</span><span class="p">(</span><span class="n">subcommand_action</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="extend_parser"><a class="viewcode-back" href="../../../../../../reference/danoan.word_guru.cli.commands.dictionary_commands.get_definition.html#danoan.word_guru.cli.commands.dictionary_commands.get_definition.extend_parser">[docs]</a><span class="k">def</span> <span class="nf">extend_parser</span><span class="p">(</span><span class="n">subcommand_action</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">command_name</span> <span class="o">=</span> <span class="s2">&quot;get-definition&quot;</span>
     <span class="n">description</span> <span class="o">=</span> <span class="n">get_definition</span><span class="o">.</span><span class="vm">__doc__</span>
     <span class="n">help</span> <span class="o">=</span> <span class="n">description</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">description</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
@@ -139,10 +134,7 @@
     <span class="k">return</span> <span class="n">parser</span></div>
 
 
-
-<div class="viewcode-block" id="main">
-<a class="viewcode-back" href="../../../../../../reference/danoan.word_guru.cli.commands.dictionary_commands.get_definition.html#danoan.word_guru.cli.commands.dictionary_commands.get_definition.main">[docs]</a>
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<div class="viewcode-block" id="main"><a class="viewcode-back" href="../../../../../../reference/danoan.word_guru.cli.commands.dictionary_commands.get_definition.html#danoan.word_guru.cli.commands.dictionary_commands.get_definition.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
     <span class="n">parser</span> <span class="o">=</span> <span class="n">extend_parser</span><span class="p">()</span>
 
     <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
@@ -152,7 +144,6 @@
         <span class="n">args</span><span class="o">.</span><span class="n">subcommand_help</span><span class="p">()</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">parser</span><span class="o">.</span><span class="n">print_help</span><span class="p">()</span></div>
-
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>

@@ -12,6 +12,7 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
+   danoan.word_guru.cli.commands.copywriter_commands
    danoan.word_guru.cli.commands.dictionary_commands
 
 Submodules
@@ -20,5 +21,7 @@ Submodules
 .. toctree::
    :maxdepth: 4
 
+   danoan.word_guru.cli.commands.copywriter
    danoan.word_guru.cli.commands.dictionary
    danoan.word_guru.cli.commands.setup
+   danoan.word_guru.cli.commands.translate

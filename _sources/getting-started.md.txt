@@ -1,12 +1,31 @@
 # Getting started with word-guru
 
-Your language expert.
+Collection of prompts to answer language-related queries.
 
 ## Features
 
+### Copywriter
+
+- Text correction
+
+### Dictionary
+
+- Definition
+- Synonym
+- Reverse Definition
+- Usage Examples
+- Part-of-Speech tags
+
+### Interpreter
+
+- Translation
 
 ## Examples
 
+```bash
+$ word-guru dictionary get-reverse-definition "that feeling of accomplishment after several days of hard work" eng
+["achievement", "fulfillment", "satisfaction"]
+```
 
 ## Contributing
 

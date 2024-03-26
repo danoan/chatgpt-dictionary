@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" data-content_root="../../../../">
+<html class="writer-html5" lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,9 +15,9 @@
   
         <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../../_static/documentation_options.js?v=01f34227"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js?v=2389946f"></script>
         <script src="../../../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=4825356b"></script>
         <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
         <script>mermaid.initialize({startOnLoad:true});</script>
     <script src="../../../../_static/js/theme.js"></script>
@@ -90,18 +90,13 @@
 <span class="n">ENV_WORD_GURU</span> <span class="o">=</span> <span class="s2">&quot;WORD_GURU_CONFIGURATION_FOLDER&quot;</span>
 
 
-<div class="viewcode-block" id="ensure_environment_variable_exist">
-<a class="viewcode-back" href="../../../../reference/danoan.word_guru.cli.utils.html#danoan.word_guru.cli.utils.ensure_environment_variable_exist">[docs]</a>
-<span class="k">def</span> <span class="nf">ensure_environment_variable_exist</span><span class="p">():</span>
+<div class="viewcode-block" id="ensure_environment_variable_exist"><a class="viewcode-back" href="../../../../reference/danoan.word_guru.cli.utils.html#danoan.word_guru.cli.utils.ensure_environment_variable_exist">[docs]</a><span class="k">def</span> <span class="nf">ensure_environment_variable_exist</span><span class="p">():</span>
     <span class="k">if</span> <span class="n">ENV_WORD_GURU</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">exception</span><span class="o">.</span><span class="n">EnvironmentVariableIsNotSet</span><span class="p">(</span><span class="n">environment_variable</span><span class="o">=</span><span class="n">ENV_WORD_GURU</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="n">ENV_WORD_GURU</span><span class="p">]</span></div>
 
 
-
-<div class="viewcode-block" id="ensure_configuration_file_exist">
-<a class="viewcode-back" href="../../../../reference/danoan.word_guru.cli.utils.html#danoan.word_guru.cli.utils.ensure_configuration_file_exist">[docs]</a>
-<span class="k">def</span> <span class="nf">ensure_configuration_file_exist</span><span class="p">():</span>
+<div class="viewcode-block" id="ensure_configuration_file_exist"><a class="viewcode-back" href="../../../../reference/danoan.word_guru.cli.utils.html#danoan.word_guru.cli.utils.ensure_configuration_file_exist">[docs]</a><span class="k">def</span> <span class="nf">ensure_configuration_file_exist</span><span class="p">():</span>
     <span class="n">ensure_environment_variable_exist</span><span class="p">()</span>
     <span class="n">configuration_filepath</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="n">ENV_WORD_GURU</span><span class="p">])</span> <span class="o">/</span> <span class="s2">&quot;config.toml&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">configuration_filepath</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
@@ -111,15 +106,11 @@
     <span class="k">return</span> <span class="n">configuration_filepath</span></div>
 
 
-
-<div class="viewcode-block" id="get_configuration_file">
-<a class="viewcode-back" href="../../../../reference/danoan.word_guru.cli.utils.html#danoan.word_guru.cli.utils.get_configuration_file">[docs]</a>
-<span class="k">def</span> <span class="nf">get_configuration_file</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">model</span><span class="o">.</span><span class="n">ConfigurationFile</span><span class="p">:</span>
+<div class="viewcode-block" id="get_configuration_file"><a class="viewcode-back" href="../../../../reference/danoan.word_guru.cli.utils.html#danoan.word_guru.cli.utils.get_configuration_file">[docs]</a><span class="k">def</span> <span class="nf">get_configuration_file</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">model</span><span class="o">.</span><span class="n">ConfigurationFile</span><span class="p">:</span>
     <span class="n">configuration_filepath</span> <span class="o">=</span> <span class="n">ensure_configuration_file_exist</span><span class="p">()</span>
 
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">configuration_filepath</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">ConfigurationFile</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">f</span><span class="p">)</span></div>
-
 </pre></div>
 
            </div>

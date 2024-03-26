@@ -1,0 +1,7 @@
+danoan.word\_guru.cli.commands.translate module
+===============================================
+
+.. automodule:: danoan.word_guru.cli.commands.translate
+   :members:
+   :undoc-members:
+   :show-inheritance:

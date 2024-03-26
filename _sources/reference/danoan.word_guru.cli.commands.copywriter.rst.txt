@@ -1,0 +1,7 @@
+danoan.word\_guru.cli.commands.copywriter module
+================================================
+
+.. automodule:: danoan.word_guru.cli.commands.copywriter
+   :members:
+   :undoc-members:
+   :show-inheritance:

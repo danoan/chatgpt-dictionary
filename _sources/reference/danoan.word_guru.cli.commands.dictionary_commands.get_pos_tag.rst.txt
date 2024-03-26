@@ -1,0 +1,7 @@
+danoan.word\_guru.cli.commands.dictionary\_commands.get\_pos\_tag module
+========================================================================
+
+.. automodule:: danoan.word_guru.cli.commands.dictionary_commands.get_pos_tag
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>danoan.word_guru.cli.commands.dictionary_commands.get_reverse_definition &mdash; word-guru 0.1.0 documentation</title>
+  <title>danoan.word_guru.cli.commands.dictionary_commands.get_synonym &mdash; word-guru 0.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../../../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../../../../_static/css/custom.css?v=a3d76245" />
@@ -72,7 +72,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../../../../index.html">Module code</a></li>
-      <li class="breadcrumb-item active">danoan.word_guru.cli.commands.dictionary_commands.get_reverse_definition</li>
+      <li class="breadcrumb-item active">danoan.word_guru.cli.commands.dictionary_commands.get_synonym</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -81,7 +81,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>Source code for danoan.word_guru.cli.commands.dictionary_commands.get_reverse_definition</h1><div class="highlight"><pre>
+  <h1>Source code for danoan.word_guru.cli.commands.dictionary_commands.get_synonym</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">danoan.word_guru.core</span> <span class="kn">import</span> <span class="n">api</span><span class="p">,</span> <span class="n">exception</span>
 
 <span class="kn">import</span> <span class="nn">argparse</span>
@@ -95,19 +95,19 @@
 <span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">handler</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="get_reverse_definition"><a class="viewcode-back" href="../../../../../../reference/danoan.word_guru.cli.commands.dictionary_commands.get_reverse_definition.html#danoan.word_guru.cli.commands.dictionary_commands.get_reverse_definition.get_reverse_definition">[docs]</a><span class="k">def</span> <span class="nf">get_reverse_definition</span><span class="p">(</span><span class="n">openai_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">language</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="get_synonym"><a class="viewcode-back" href="../../../../../../reference/danoan.word_guru.cli.commands.dictionary_commands.get_synonym.html#danoan.word_guru.cli.commands.dictionary_commands.get_synonym.get_synonym">[docs]</a><span class="k">def</span> <span class="nf">get_synonym</span><span class="p">(</span><span class="n">openai_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">language</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Get a list of words that best encodes a given text.</span>
+<span class="sd">    Get synonyms of a word in the given language.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">api</span><span class="o">.</span><span class="n">get_reverse_definition</span><span class="p">(</span><span class="n">openai_key</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">language</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">api</span><span class="o">.</span><span class="n">get_synonym</span><span class="p">(</span><span class="n">openai_key</span><span class="p">,</span> <span class="n">word</span><span class="p">,</span> <span class="n">language</span><span class="p">))</span>
     <span class="k">except</span> <span class="n">exception</span><span class="o">.</span><span class="n">OpenAIEmptyResponse</span><span class="p">:</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;OpeanAI returned an empty response.&quot;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="extend_parser"><a class="viewcode-back" href="../../../../../../reference/danoan.word_guru.cli.commands.dictionary_commands.get_reverse_definition.html#danoan.word_guru.cli.commands.dictionary_commands.get_reverse_definition.extend_parser">[docs]</a><span class="k">def</span> <span class="nf">extend_parser</span><span class="p">(</span><span class="n">subcommand_action</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="n">command_name</span> <span class="o">=</span> <span class="s2">&quot;get-reverse-definition&quot;</span>
-    <span class="n">description</span> <span class="o">=</span> <span class="n">get_reverse_definition</span><span class="o">.</span><span class="vm">__doc__</span>
+<div class="viewcode-block" id="extend_parser"><a class="viewcode-back" href="../../../../../../reference/danoan.word_guru.cli.commands.dictionary_commands.get_synonym.html#danoan.word_guru.cli.commands.dictionary_commands.get_synonym.extend_parser">[docs]</a><span class="k">def</span> <span class="nf">extend_parser</span><span class="p">(</span><span class="n">subcommand_action</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">command_name</span> <span class="o">=</span> <span class="s2">&quot;get-synonym&quot;</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="n">get_synonym</span><span class="o">.</span><span class="vm">__doc__</span>
     <span class="n">help</span> <span class="o">=</span> <span class="n">description</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">description</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">subcommand_action</span><span class="p">:</span>
@@ -124,19 +124,17 @@
             <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">RawDescriptionHelpFormatter</span><span class="p">,</span>
         <span class="p">)</span>
 
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-        <span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The text you ask for the word that best encode its intention.&quot;</span>
-    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;word&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The word you ask for synonyms.&quot;</span><span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
         <span class="s2">&quot;language&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The IETF 639-3 code of the language. E.g. eng&quot;</span>
     <span class="p">)</span>
 
-    <span class="n">parser</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">get_reverse_definition</span><span class="p">,</span> <span class="n">subcommand_help</span><span class="o">=</span><span class="n">parser</span><span class="o">.</span><span class="n">print_help</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">get_synonym</span><span class="p">,</span> <span class="n">subcommand_help</span><span class="o">=</span><span class="n">parser</span><span class="o">.</span><span class="n">print_help</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">parser</span></div>
 
 
-<div class="viewcode-block" id="main"><a class="viewcode-back" href="../../../../../../reference/danoan.word_guru.cli.commands.dictionary_commands.get_reverse_definition.html#danoan.word_guru.cli.commands.dictionary_commands.get_reverse_definition.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<div class="viewcode-block" id="main"><a class="viewcode-back" href="../../../../../../reference/danoan.word_guru.cli.commands.dictionary_commands.get_synonym.html#danoan.word_guru.cli.commands.dictionary_commands.get_synonym.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
     <span class="n">parser</span> <span class="o">=</span> <span class="n">extend_parser</span><span class="p">()</span>
 
     <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>

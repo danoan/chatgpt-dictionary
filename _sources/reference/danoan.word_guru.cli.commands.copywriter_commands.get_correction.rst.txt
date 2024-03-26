@@ -1,0 +1,7 @@
+danoan.word\_guru.cli.commands.copywriter\_commands.get\_correction module
+==========================================================================
+
+.. automodule:: danoan.word_guru.cli.commands.copywriter_commands.get_correction
+   :members:
+   :undoc-members:
+   :show-inheritance:

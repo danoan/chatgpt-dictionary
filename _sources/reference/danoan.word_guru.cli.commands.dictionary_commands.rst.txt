@@ -13,6 +13,7 @@ Submodules
    :maxdepth: 4
 
    danoan.word_guru.cli.commands.dictionary_commands.get_definition
+   danoan.word_guru.cli.commands.dictionary_commands.get_pos_tag
    danoan.word_guru.cli.commands.dictionary_commands.get_reverse_definition
-   danoan.word_guru.cli.commands.dictionary_commands.get_synonyme
+   danoan.word_guru.cli.commands.dictionary_commands.get_synonym
    danoan.word_guru.cli.commands.dictionary_commands.get_usage_examples

@@ -1,0 +1,15 @@
+danoan.word\_guru.cli.commands.copywriter\_commands package
+===========================================================
+
+.. automodule:: danoan.word_guru.cli.commands.copywriter_commands
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   danoan.word_guru.cli.commands.copywriter_commands.get_correction
