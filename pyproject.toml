@@ -52,7 +52,7 @@ pythonpath = [
 "test" # Needed in order to import conftest.py in test modules
 ]
 markers = [
-    "api: these test make api calls."
+    "api: these tests make api calls."
 ]
 
 # -------------------- code coverage --------------------
