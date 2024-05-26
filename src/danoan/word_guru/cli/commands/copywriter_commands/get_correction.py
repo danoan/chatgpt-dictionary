@@ -2,7 +2,9 @@ from danoan.word_guru.core import api, exception
 
 import argparse
 import logging
+from pathlib import Path
 import sys
+from typing import Optional
 
 logger = logging.getLogger(__name__)
 handler = logging.StreamHandler()
@@ -11,12 +13,27 @@ handler.setLevel(logging.INFO)
 logger.addHandler(handler)
 
 
-def get_correction(openai_key: str, text: str, language: str, *args, **kwargs):
+def get_correction(
+    openai_key: str,
+    cache_folder: Optional[str],
+    text: str,
+    language: str,
+    *args,
+    **kwargs,
+):
     """
     Get the corrected version of a text.
     """
+    if cache_folder:
+        cache_folder_path = Path(cache_folder)
+        if not cache_folder_path.exists():
+            logger.error(
+                "The given cache folder does not exist. Create one before proceeding."
+            )
+            exit(1)
+
     try:
-        print(api.get_correction(openai_key, text, language))
+        print(api.get_correction(openai_key, cache_folder_path, text, language))
     except exception.OpenAIEmptyResponse:
         logger.error("OpeanAI returned an empty response.")
 

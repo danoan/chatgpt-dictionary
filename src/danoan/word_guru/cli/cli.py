@@ -23,6 +23,10 @@ def extend_parser(subcommand_action=None):
         "--openai-key",
         help="The OpenAI key id used to authenticate requests to OpenAI API.",
     )
+    parser.add_argument(
+        "--cache-folder",
+        help="If specified, use this folder as cache. Otherwise, it uses the folder specified in the configuration file",
+    )
 
     subparser_action = parser.add_subparsers()
 
