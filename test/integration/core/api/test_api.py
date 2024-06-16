@@ -23,7 +23,7 @@ def openai_key(pytestconfig):
     ],
 )
 def test_get_definition(openai_key, word, language):
-    response = api.get_definition(openai_key, word, language)
+    response = api.get_definition(openai_key, None, word, language)
     assert response
     obj = json.loads(response)
     assert len(obj) > 0
@@ -39,7 +39,7 @@ def test_get_definition(openai_key, word, language):
     ],
 )
 def test_get_synonym(openai_key, word, language):
-    response = api.get_definition(openai_key, word, language)
+    response = api.get_definition(openai_key, None, word, language)
     assert response
     obj = json.loads(response)
     assert len(obj) > 0
@@ -55,7 +55,7 @@ def test_get_synonym(openai_key, word, language):
     ],
 )
 def test_get_reverse_definition(openai_key, text, language, mandate_words):
-    response = api.get_reverse_definition(openai_key, text, language)
+    response = api.get_reverse_definition(openai_key, None, text, language)
     assert response
     obj = json.loads(response)
     assert len(obj) > 0
@@ -74,7 +74,7 @@ def test_get_reverse_definition(openai_key, text, language, mandate_words):
     ],
 )
 def test_get_usage_examples(openai_key, word, language):
-    response = api.get_usage_examples(openai_key, word, language)
+    response = api.get_usage_examples(openai_key, None, word, language)
     assert response
     obj = json.loads(response)
     assert len(obj) > 0
