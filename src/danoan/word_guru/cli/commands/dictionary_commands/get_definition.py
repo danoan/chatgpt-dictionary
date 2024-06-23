@@ -31,6 +31,8 @@ def get_definition(
                 "The given cache folder does not exist. Create one before proceeding."
             )
             exit(1)
+    else:
+        cache_folder_path = None
 
     try:
         print(api.get_definition(openai_key, cache_folder_path, word, language))
