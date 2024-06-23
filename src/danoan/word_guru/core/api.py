@@ -61,8 +61,9 @@ def _call_openai(
         cache = _Cache(cache_folder)
 
     response = None
+    cache_query = prompt + content
     if cache:
-        response = cache.load(prompt)
+        response = cache.load(cache_query)
 
     if not response:
         completion = client.chat.completions.create(
@@ -80,7 +81,7 @@ def _call_openai(
             response = completion.choices[0].message.content
 
         if cache:
-            cache.save(prompt, response)
+            cache.save(cache_query, response)
 
     return response
 
