@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>danoan.word_guru.core.api module &mdash; word-guru 0.1.0 documentation</title>
+  <title>danoan.word_guru.core.api module &mdash; word-guru 0.2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=a3d76245" />
@@ -14,7 +14,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=2389946f"></script>
+      <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b1f64a84"></script>
       <script src="../_static/doctools.js?v=888ff710"></script>
       <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../_static/js/theme.js"></script>
@@ -82,16 +82,22 @@
 <span class="sig-prename descclassname"><span class="pre">danoan.word_guru.core.api.</span></span><span class="sig-name descname"><span class="pre">get_correction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">openai_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cache_folder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">word</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">language_alpha3</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/danoan/word_guru/core/api.html#get_correction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#danoan.word_guru.core.api.get_correction" title="Permalink to this definition"></a></dt>
 <dd><p>Get the corrected version of a text.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="danoan.word_guru.core.exception.html#danoan.word_guru.core.exception.OpenAIEmptyResponse" title="danoan.word_guru.core.exception.OpenAIEmptyResponse"><strong>OpenAIEmptyResponse</strong></a> – If openai return an empty response.</p></li>
+<li><p><a class="reference internal" href="danoan.word_guru.core.exception.html#danoan.word_guru.core.exception.LanguageCodeNotRecognizedError" title="danoan.word_guru.core.exception.LanguageCodeNotRecognizedError"><strong>LanguageCodeNotRecognizedError</strong></a> – If language code is not recognized.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
 <li><p><strong>openai_key</strong> (<em>str</em>) – </p></li>
 <li><p><strong>cache_folder</strong> (<em>Path</em><em> | </em><em>None</em>) – </p></li>
 <li><p><strong>word</strong> (<em>str</em>) – </p></li>
 <li><p><strong>language_alpha3</strong> (<em>str</em>) – </p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
@@ -102,15 +108,21 @@
 <dd><p>Get the definition of a word.</p>
 <p>The response is a string containing the definition of the word.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="danoan.word_guru.core.exception.html#danoan.word_guru.core.exception.OpenAIEmptyResponse" title="danoan.word_guru.core.exception.OpenAIEmptyResponse"><strong>OpenAIEmptyResponse</strong></a> – If openai return an empty response.</p></li>
+<li><p><a class="reference internal" href="danoan.word_guru.core.exception.html#danoan.word_guru.core.exception.LanguageCodeNotRecognizedError" title="danoan.word_guru.core.exception.LanguageCodeNotRecognizedError"><strong>LanguageCodeNotRecognizedError</strong></a> – If language code is not recognized.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
 <li><p><strong>openai_key</strong> (<em>str</em>) – </p></li>
 <li><p><strong>cache_folder</strong> (<em>Path</em><em> | </em><em>None</em>) – </p></li>
 <li><p><strong>word</strong> (<em>str</em>) – </p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
@@ -121,16 +133,22 @@
 <dd><p>Get the part-of-speech tag of the most common uses of the word.</p>
 <p>The response is a string which the content is a json list with strings, each one representing a pos tag.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="danoan.word_guru.core.exception.html#danoan.word_guru.core.exception.OpenAIEmptyResponse" title="danoan.word_guru.core.exception.OpenAIEmptyResponse"><strong>OpenAIEmptyResponse</strong></a> – If openai return an empty response.</p></li>
+<li><p><a class="reference internal" href="danoan.word_guru.core.exception.html#danoan.word_guru.core.exception.LanguageCodeNotRecognizedError" title="danoan.word_guru.core.exception.LanguageCodeNotRecognizedError"><strong>LanguageCodeNotRecognizedError</strong></a> – If language code is not recognized.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
 <li><p><strong>openai_key</strong> (<em>str</em>) – </p></li>
 <li><p><strong>cache_folder</strong> (<em>Path</em><em> | </em><em>None</em>) – </p></li>
 <li><p><strong>word</strong> (<em>str</em>) – </p></li>
 <li><p><strong>language_alpha3</strong> (<em>str</em>) – </p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
@@ -141,16 +159,22 @@
 <dd><p>Get a list of words that best encode the intention of a text.</p>
 <p>The response is a string which the content is a json list with strings, each one representing a word.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="danoan.word_guru.core.exception.html#danoan.word_guru.core.exception.OpenAIEmptyResponse" title="danoan.word_guru.core.exception.OpenAIEmptyResponse"><strong>OpenAIEmptyResponse</strong></a> – If openai return an empty response.</p></li>
+<li><p><a class="reference internal" href="danoan.word_guru.core.exception.html#danoan.word_guru.core.exception.LanguageCodeNotRecognizedError" title="danoan.word_guru.core.exception.LanguageCodeNotRecognizedError"><strong>LanguageCodeNotRecognizedError</strong></a> – If language code is not recognized.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
 <li><p><strong>openai_key</strong> (<em>str</em>) – </p></li>
 <li><p><strong>cache_folder</strong> (<em>Path</em><em> | </em><em>None</em>) – </p></li>
 <li><p><strong>text</strong> (<em>str</em>) – </p></li>
 <li><p><strong>language_alpha3</strong> (<em>str</em>) – </p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
@@ -161,15 +185,21 @@
 <dd><p>Get the synonyms of a word.</p>
 <p>The response is string which content is a json list with strings, each one representing a synonym.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="danoan.word_guru.core.exception.html#danoan.word_guru.core.exception.OpenAIEmptyResponse" title="danoan.word_guru.core.exception.OpenAIEmptyResponse"><strong>OpenAIEmptyResponse</strong></a> – If openai return an empty response.</p></li>
+<li><p><a class="reference internal" href="danoan.word_guru.core.exception.html#danoan.word_guru.core.exception.LanguageCodeNotRecognizedError" title="danoan.word_guru.core.exception.LanguageCodeNotRecognizedError"><strong>LanguageCodeNotRecognizedError</strong></a> – If language code is not recognized.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
 <li><p><strong>openai_key</strong> (<em>str</em>) – </p></li>
 <li><p><strong>cache_folder</strong> (<em>Path</em><em> | </em><em>None</em>) – </p></li>
 <li><p><strong>word</strong> (<em>str</em>) – </p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
@@ -179,8 +209,14 @@
 <span class="sig-prename descclassname"><span class="pre">danoan.word_guru.core.api.</span></span><span class="sig-name descname"><span class="pre">get_translation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">openai_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cache_folder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">word</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">from_language_alpha3</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_language_alpha3</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/danoan/word_guru/core/api.html#get_translation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#danoan.word_guru.core.api.get_translation" title="Permalink to this definition"></a></dt>
 <dd><p>Get the translation of a word or expression.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="danoan.word_guru.core.exception.html#danoan.word_guru.core.exception.OpenAIEmptyResponse" title="danoan.word_guru.core.exception.OpenAIEmptyResponse"><strong>OpenAIEmptyResponse</strong></a> – If openai return an empty response.</p></li>
+<li><p><a class="reference internal" href="danoan.word_guru.core.exception.html#danoan.word_guru.core.exception.LanguageCodeNotRecognizedError" title="danoan.word_guru.core.exception.LanguageCodeNotRecognizedError"><strong>LanguageCodeNotRecognizedError</strong></a> – If language code is not recognized.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
 <li><p><strong>openai_key</strong> (<em>str</em>) – </p></li>
 <li><p><strong>cache_folder</strong> (<em>Path</em><em> | </em><em>None</em>) – </p></li>
 <li><p><strong>word</strong> (<em>str</em>) – </p></li>
@@ -188,8 +224,8 @@
 <li><p><strong>to_language_alpha3</strong> (<em>str</em>) – </p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
@@ -200,16 +236,22 @@
 <dd><p>Get a list of sentences in which the word is used with their different meanings.</p>
 <p>The response is a string which the content is a json list with strings, each one representing a word.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="danoan.word_guru.core.exception.html#danoan.word_guru.core.exception.OpenAIEmptyResponse" title="danoan.word_guru.core.exception.OpenAIEmptyResponse"><strong>OpenAIEmptyResponse</strong></a> – If openai return an empty response.</p></li>
+<li><p><a class="reference internal" href="danoan.word_guru.core.exception.html#danoan.word_guru.core.exception.LanguageCodeNotRecognizedError" title="danoan.word_guru.core.exception.LanguageCodeNotRecognizedError"><strong>LanguageCodeNotRecognizedError</strong></a> – If language code is not recognized.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
 <li><p><strong>openai_key</strong> (<em>str</em>) – </p></li>
 <li><p><strong>cache_folder</strong> (<em>Path</em><em> | </em><em>None</em>) – </p></li>
 <li><p><strong>word</strong> (<em>str</em>) – </p></li>
 <li><p><strong>language_alpha3</strong> (<em>str</em>) – </p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
