@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "word-guru"
-version = "0.3.0"
+version = "0.3.1"
 description = "Your language expert"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -20,7 +20,7 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
-dependencies = ["openai", "jinja2", "pycountry", "toml-dataclass", "llm-assistant==0.5.0"]
+dependencies = ["openai", "jinja2", "pycountry", "toml-dataclass", "llm-assistant==0.5.1"]
 
 [project.urls]
 Documentation = "https://github.com/danoan/word-guru#readme"
