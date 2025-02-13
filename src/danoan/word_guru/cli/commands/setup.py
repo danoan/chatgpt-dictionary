@@ -47,11 +47,6 @@ def extend_parser(subcommand_action=None):
             formatter_class=argparse.RawDescriptionHelpFormatter,
         )
 
-    subparser_action = parser.add_subparsers()
-    # list_of_commands = [init]
-    # for command in list_of_commands:
-    #     command.extend_parser(subparser_action)
-
     parser.set_defaults(func=print_config, subcommand_help=parser.print_help)
     return parser
 

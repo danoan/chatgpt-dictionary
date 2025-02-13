@@ -2,7 +2,9 @@ from danoan.word_guru.core import api, exception
 
 import argparse
 import logging
+from pathlib import Path
 import sys
+from typing import Optional
 
 logger = logging.getLogger(__name__)
 handler = logging.StreamHandler()
@@ -12,13 +14,31 @@ logger.addHandler(handler)
 
 
 def get_translation(
-    openai_key: str, word: str, from_language: str, to_language: str, *args, **kwargs
+    openai_key: str,
+    cache_folder: Optional[str],
+    word: str,
+    from_language: str,
+    to_language: str,
+    *args,
+    **kwargs,
 ):
     """
     Get the translation of the word.
     """
+    if cache_folder:
+        cache_folder_path = Path(cache_folder)
+        if not cache_folder_path.exists():
+            logger.error(
+                "The given cache folder does not exist. Create one before proceeding."
+            )
+            exit(1)
+
     try:
-        print(api.get_translation(openai_key, word, from_language, to_language))
+        print(
+            api.get_translation(
+                openai_key, cache_folder_path, word, from_language, to_language
+            )
+        )
     except exception.OpenAIEmptyResponse:
         logger.error("OpeanAI returned an empty response.")
 

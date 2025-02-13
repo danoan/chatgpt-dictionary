@@ -1,34 +1,93 @@
 from danoan.word_guru.core import exception
 
+from hashlib import sha256
 from jinja2 import Environment, PackageLoader
 from openai import OpenAI
 import pycountry
-from typing import Dict, Any
+from typing import Dict, Optional, Any
+from pathlib import Path
 
 env = Environment(loader=PackageLoader("danoan.word_guru", package_path="prompts"))
 
 
+def _singleton(cls):
+    instances = {}
+
+    def get_instance(*args, **kwargs):
+        if cls not in instances:
+            instances[cls] = cls(*args, **kwargs)
+        return instances[cls]
+
+    return get_instance
+
+
+@_singleton
+class _Cache:
+    def __init__(self, cache_folder: Path):
+        if cache_folder.exists():
+            self.cache_folder = cache_folder
+            self.cache_folder.mkdir(parents=True, exist_ok=True)
+        else:
+            raise FileNotFoundError()
+
+    def load(self, prompt: str):
+        k = sha256(prompt.encode("utf-8")).hexdigest()
+        cache_file = self.cache_folder / f"{k}.txt"
+        if cache_file.exists():
+            with open(cache_file, "r") as f:
+                return f.read()
+        else:
+            return None
+
+    def save(self, prompt: str, response: str):
+        k = sha256(prompt.encode("utf-8")).hexdigest()
+        cache_file = self.cache_folder / f"{k}.txt"
+        with open(cache_file, "w") as f:
+            f.write(response)
+
+
 def _call_openai(
-    openai_key: str, prompt_filename: str, prompt_data: Dict[str, Any], content: str
+    openai_key: str,
+    cache_folder: Optional[Path],
+    prompt_filename: str,
+    prompt_data: Dict[str, Any],
+    content: str,
 ):
     client = OpenAI(api_key=openai_key)
     prompt = env.get_template(prompt_filename).render(data=prompt_data)
-    completion = client.chat.completions.create(
-        model="gpt-3.5-turbo",
-        messages=[
-            {"role": "system", "content": prompt},
-            {"role": "user", "content": f"<<{content}>>"},
-        ],
-        top_p=0.1,
-    )
 
-    if len(completion.choices) == 0:
-        return None
-    else:
-        return completion.choices[0].message.content
+    cache = None
+    if cache_folder:
+        cache = _Cache(cache_folder)
+
+    response = None
+    if cache:
+        response = cache.load(prompt)
+
+    if not response:
+        completion = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": prompt},
+                {"role": "user", "content": f"<<{content}>>"},
+            ],
+            top_p=0.1,
+        )
+
+        if len(completion.choices) == 0:
+            return None
+        else:
+            response = completion.choices[0].message.content
+
+        if cache:
+            cache.save(prompt, response)
+
+    return response
 
 
-def get_definition(openai_key: str, word: str, language_alpha3) -> str:
+def get_definition(
+    openai_key: str, cache_folder: Optional[Path], word: str, language_alpha3
+) -> str:
     """
     Get the definition of a word.
 
@@ -37,14 +96,16 @@ def get_definition(openai_key: str, word: str, language_alpha3) -> str:
     prompt_filename = "get-simple-definition.txt"
     language = pycountry.languages.get(alpha_3=language_alpha3)
     data = {"language_name": language.name}
-    text_response = _call_openai(openai_key, prompt_filename, data, word)
+    text_response = _call_openai(openai_key, cache_folder, prompt_filename, data, word)
     if not text_response:
         raise exception.OpenAIEmptyResponse()
 
     return text_response
 
 
-def get_synonym(openai_key: str, word: str, language_alpha3) -> str:
+def get_synonym(
+    openai_key: str, cache_folder: Optional[Path], word: str, language_alpha3
+) -> str:
     """
     Get the synonyms of a word.
 
@@ -53,14 +114,16 @@ def get_synonym(openai_key: str, word: str, language_alpha3) -> str:
     prompt_filename = "get-synonym.txt"
     language = pycountry.languages.get(alpha_3=language_alpha3)
     data = {"language_name": language.name}
-    text_response = _call_openai(openai_key, prompt_filename, data, word)
+    text_response = _call_openai(openai_key, cache_folder, prompt_filename, data, word)
     if not text_response:
         raise exception.OpenAIEmptyResponse()
 
     return text_response
 
 
-def get_reverse_definition(openai_key: str, text: str, language_alpha3: str) -> str:
+def get_reverse_definition(
+    openai_key: str, cache_folder: Optional[Path], text: str, language_alpha3: str
+) -> str:
     """
     Get a list of words that best encode the intention of a text.
 
@@ -69,14 +132,16 @@ def get_reverse_definition(openai_key: str, text: str, language_alpha3: str) -> 
     prompt_filename = "get-reverse-definition.txt"
     language = pycountry.languages.get(alpha_3=language_alpha3)
     data = {"language_name": language.name}
-    text_response = _call_openai(openai_key, prompt_filename, data, text)
+    text_response = _call_openai(openai_key, cache_folder, prompt_filename, data, text)
     if not text_response:
         raise exception.OpenAIEmptyResponse()
 
     return text_response
 
 
-def get_usage_examples(openai_key: str, word: str, language_alpha3: str) -> str:
+def get_usage_examples(
+    openai_key: str, cache_folder: Optional[Path], word: str, language_alpha3: str
+) -> str:
     """
     Get a list of sentences in which the word is used with their different meanings.
 
@@ -85,14 +150,16 @@ def get_usage_examples(openai_key: str, word: str, language_alpha3: str) -> str:
     prompt_filename = "get-usage-examples.txt"
     language = pycountry.languages.get(alpha_3=language_alpha3)
     data = {"language_name": language.name}
-    text_response = _call_openai(openai_key, prompt_filename, data, word)
+    text_response = _call_openai(openai_key, cache_folder, prompt_filename, data, word)
     if not text_response:
         raise exception.OpenAIEmptyResponse()
 
     return text_response
 
 
-def get_pos_tag(openai_key: str, word: str, language_alpha3: str) -> str:
+def get_pos_tag(
+    openai_key: str, cache_folder: Optional[Path], word: str, language_alpha3: str
+) -> str:
     """
     Get the part-of-speech tag of the most common uses of the word.
 
@@ -101,7 +168,7 @@ def get_pos_tag(openai_key: str, word: str, language_alpha3: str) -> str:
     prompt_filename = "get-pos-tag.txt"
     language = pycountry.languages.get(alpha_3=language_alpha3)
     data = {"language_name": language.name}
-    text_response = _call_openai(openai_key, prompt_filename, data, word)
+    text_response = _call_openai(openai_key, cache_folder, prompt_filename, data, word)
     if not text_response:
         raise exception.OpenAIEmptyResponse()
 
@@ -109,7 +176,11 @@ def get_pos_tag(openai_key: str, word: str, language_alpha3: str) -> str:
 
 
 def get_translation(
-    openai_key: str, word: str, from_language_alpha3: str, to_language_alpha3: str
+    openai_key: str,
+    cache_folder: Optional[Path],
+    word: str,
+    from_language_alpha3: str,
+    to_language_alpha3: str,
 ) -> str:
     """
     Get the translation of a word or expression.
@@ -121,21 +192,23 @@ def get_translation(
         "from_language_name": from_language.name,
         "to_language_name": to_language.name,
     }
-    text_response = _call_openai(openai_key, prompt_filename, data, word)
+    text_response = _call_openai(openai_key, cache_folder, prompt_filename, data, word)
     if not text_response:
         raise exception.OpenAIEmptyResponse()
 
     return text_response
 
 
-def get_correction(openai_key: str, word: str, language_alpha3: str) -> str:
+def get_correction(
+    openai_key: str, cache_folder: Optional[Path], word: str, language_alpha3: str
+) -> str:
     """
     Get the corrected version of a text.
     """
     prompt_filename = "get-correction.txt"
     language = pycountry.languages.get(alpha_3=language_alpha3)
     data = {"language_name": language.name}
-    text_response = _call_openai(openai_key, prompt_filename, data, word)
+    text_response = _call_openai(openai_key, cache_folder, prompt_filename, data, word)
     if not text_response:
         raise exception.OpenAIEmptyResponse()
 
