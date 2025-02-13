@@ -21,7 +21,7 @@ def print_config(*args, **kwargs):
 
 def extend_parser(subcommand_action=None):
     command_name = "setup"
-    description = "List or initialize a configuration file"
+    description = "Initialize or list the current configuration file"
     help = description
 
     if subcommand_action:

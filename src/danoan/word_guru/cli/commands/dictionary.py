@@ -11,7 +11,7 @@ import argparse
 
 def extend_parser(subcommand_action=None):
     command_name = "dictionary"
-    description = "Multilanguage dictionary"
+    description = "Multi-language dictionary"
     help = description
 
     if subcommand_action:
