@@ -46,7 +46,7 @@ def get_definition(
     The response is a string containing the definition of the word.
 
     Raises:
-        OpenAIEmptyResponse: If openai return an empty response.
+        OpenAIEmptyResponseError: If openai return an empty response.
         LanguageCodeNotRecognizedError: If language code is not recognized.
     """
     prompt_filename = "word-definition.toml"
@@ -54,7 +54,7 @@ def get_definition(
     data = {"language": language.name, "message": word}
     response = _call_llm(openai_key, cache_path, prompt_filename, data)
     if not response:
-        raise exception.OpenAIEmptyResponse()
+        raise exception.OpenAIEmptyResponseError()
 
     return response.content
 
@@ -68,7 +68,7 @@ def get_synonym(
     The response is string which content is a json list with strings, each one representing a synonym.
 
     Raises:
-        OpenAIEmptyResponse: If openai return an empty response.
+        OpenAIEmptyResponseError: If openai return an empty response.
         LanguageCodeNotRecognizedError: If language code is not recognized.
     """
     prompt_filename = "alternative-expression.toml"
@@ -76,7 +76,7 @@ def get_synonym(
     data = {"language": language.name, "message": word}
     response = _call_llm(openai_key, cache_path, prompt_filename, data)
     if not response:
-        raise exception.OpenAIEmptyResponse()
+        raise exception.OpenAIEmptyResponseError()
 
     return response.content
 
@@ -90,7 +90,7 @@ def get_reverse_definition(
     The response is a string which the content is a json list with strings, each one representing a word.
 
     Raises:
-        OpenAIEmptyResponse: If openai return an empty response.
+        OpenAIEmptyResponseError: If openai return an empty response.
         LanguageCodeNotRecognizedError: If language code is not recognized.
     """
     prompt_filename = "reverse-definition.toml"
@@ -98,7 +98,7 @@ def get_reverse_definition(
     data = {"language": language.name, "message": text}
     response = _call_llm(openai_key, cache_path, prompt_filename, data)
     if not response:
-        raise exception.OpenAIEmptyResponse()
+        raise exception.OpenAIEmptyResponseError()
 
     return response.content
 
@@ -112,7 +112,7 @@ def get_usage_examples(
     The response is a string which the content is a json list with strings, each one representing a word.
 
     Raises:
-        OpenAIEmptyResponse: If openai return an empty response.
+        OpenAIEmptyResponseError: If openai return an empty response.
         LanguageCodeNotRecognizedError: If language code is not recognized.
     """
     prompt_filename = "usage-examples.toml"
@@ -120,7 +120,7 @@ def get_usage_examples(
     data = {"language": language.name, "message": word}
     response = _call_llm(openai_key, cache_path, prompt_filename, data)
     if not response:
-        raise exception.OpenAIEmptyResponse()
+        raise exception.OpenAIEmptyResponseError()
 
     return response.content
 
@@ -134,7 +134,7 @@ def get_pos_tag(
     The response is a string which the content is a json list with strings, each one representing a pos tag.
 
     Raises:
-        OpenAIEmptyResponse: If openai return an empty response.
+        OpenAIEmptyResponseError: If openai return an empty response.
         LanguageCodeNotRecognizedError: If language code is not recognized.
     """
     prompt_filename = "classify-pos.toml"
@@ -142,7 +142,7 @@ def get_pos_tag(
     data = {"language": language.name, "message": word}
     response = _call_llm(openai_key, cache_path, prompt_filename, data)
     if not response:
-        raise exception.OpenAIEmptyResponse()
+        raise exception.OpenAIEmptyResponseError()
 
     return response.content
 
@@ -158,7 +158,7 @@ def get_translation(
     Get the translation of a word or expression.
 
     Raises:
-        OpenAIEmptyResponse: If openai return an empty response.
+        OpenAIEmptyResponseError: If openai return an empty response.
         LanguageCodeNotRecognizedError: If language code is not recognized.
     """
     prompt_filename = "translate.toml"
@@ -171,7 +171,7 @@ def get_translation(
     }
     response = _call_llm(openai_key, cache_path, prompt_filename, data)
     if not response:
-        raise exception.OpenAIEmptyResponse()
+        raise exception.OpenAIEmptyResponseError()
 
     return response.content
 
@@ -183,7 +183,7 @@ def get_correction(
     Get the corrected version of a text.
 
     Raises:
-        OpenAIEmptyResponse: If openai return an empty response.
+        OpenAIEmptyResponseError: If openai return an empty response.
         LanguageCodeNotRecognizedError: If language code is not recognized.
     """
     prompt_filename = "correct-text.toml"
@@ -191,6 +191,6 @@ def get_correction(
     data = {"language": language.name, "message": word}
     response = _call_llm(openai_key, cache_path, prompt_filename, data)
     if not response:
-        raise exception.OpenAIEmptyResponse()
+        raise exception.OpenAIEmptyResponseError()
 
     return response.content

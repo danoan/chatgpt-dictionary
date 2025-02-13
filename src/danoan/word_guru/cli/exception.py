@@ -1,9 +1,6 @@
-from pathlib import Path
-
-
 class EnvironmentVariableNotDefinedError(Exception):
     pass
 
 
-class WordGuruConfigurationDoesNotExistError(Exception):
+class ConfigurationFileDoesNotExistError(Exception):
     pass

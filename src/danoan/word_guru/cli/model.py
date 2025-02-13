@@ -1,12 +1,10 @@
-from danoan.toml_dataclass import TomlDataClassIO
-
 from dataclasses import dataclass, asdict
 from pathlib import Path
 from typing import Optional
 
 
 @dataclass
-class WordGuruConfiguration(TomlDataClassIO):
+class WordGuruConfiguration:
     openai_key: Optional[str] = None
     cache_path: Optional[Path] = None
 

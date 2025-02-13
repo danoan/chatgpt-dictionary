@@ -1,16 +1,12 @@
+from danoan.word_guru.logging_config import setup_logging
 from danoan.word_guru.core import api, exception
 
 import argparse
 import logging
-from pathlib import Path
-import sys
 from typing import Optional
 
+setup_logging()
 logger = logging.getLogger(__name__)
-handler = logging.StreamHandler()
-handler.setStream(sys.stderr)
-handler.setLevel(logging.INFO)
-logger.addHandler(handler)
 
 
 def get_correction(
@@ -26,7 +22,7 @@ def get_correction(
     """
     try:
         print(api.get_correction(openai_key, cache_path, text, language))
-    except exception.OpenAIEmptyResponse:
+    except exception.OpenAIEmptyResponseError:
         logger.error("OpeanAI returned an empty response.")
 
 

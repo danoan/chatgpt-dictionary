@@ -2,15 +2,19 @@
 word-guru CLI configuration
 """
 
+from danoan.word_guru.logging_config import setup_logging
 from danoan.word_guru.cli import exception
 from danoan.word_guru.cli import model
 
 from functools import lru_cache
+import logging
 import os
 from pathlib import Path
 import toml
 from typing import Optional
 
+setup_logging()
+logger = logging.getLogger(__name__)
 
 ########################################
 # Configuration files
@@ -34,7 +38,7 @@ def _get_first_configuration_filepath_within_file_hierarchy(
         cur_folder = folders_to_visit.pop()
         if cur_folder in visited:
             break
-        # TODO: logger.debug(f"Visiting {cur_folder}")
+        logger.debug(f"Visiting {cur_folder}")
         visited.add(cur_folder)
         folders_to_visit.append(cur_folder.parent)
         for p in cur_folder.iterdir():
@@ -63,16 +67,16 @@ def get_configuration_folder() -> Path:
                                             is not defined and a configuration file
                                             is not found in the file hierarchy
     """
-    # TODO: logger.debug("Start hierarchical search of configuation file")
+    logger.debug("Start hierarchical search of configuation file")
     config_filepath = _get_first_configuration_filepath_within_file_hierarchy(
         Path(os.getcwd())
     )
     if config_filepath:
         return config_filepath.parent
 
-    # TODO: logger.debug(
-    #     "Hierarchical search failed. Check environment variable {WORD_GURU_ENV_VARIABLE}"
-    # )
+    logger.debug(
+        "Hierarchical search failed. Check environment variable {WORD_GURU_ENV_VARIABLE}"
+    )
     if WORD_GURU_ENV_VARIABLE in os.environ:
         return Path(os.environ[WORD_GURU_ENV_VARIABLE]).expanduser()
 

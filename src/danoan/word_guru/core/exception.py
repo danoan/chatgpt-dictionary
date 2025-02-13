@@ -1,4 +1,4 @@
-class OpenAIEmptyResponse(Exception):
+class OpenAIEmptyResponseError(Exception):
     pass
 
 
