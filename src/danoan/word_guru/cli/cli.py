@@ -1,5 +1,5 @@
-from danoan.word_guru.cli import utils
 from danoan.word_guru.cli.commands import copywriter, dictionary, translate, setup
+from danoan.word_guru.cli import config
 
 import argparse
 
@@ -24,7 +24,7 @@ def extend_parser(subcommand_action=None):
         help="The OpenAI key id used to authenticate requests to OpenAI API.",
     )
     parser.add_argument(
-        "--cache-folder",
+        "--cache-path",
         help="If specified, use this folder as cache. Otherwise, it uses the folder specified in the configuration file",
     )
 
@@ -40,7 +40,7 @@ def extend_parser(subcommand_action=None):
 def main():
     config_file_params = {}
     try:
-        configuration_file = utils.get_configuration_file()
+        configuration_file = config.get_configuration()
         config_file_params = configuration_file.__dict__
     except:
         pass

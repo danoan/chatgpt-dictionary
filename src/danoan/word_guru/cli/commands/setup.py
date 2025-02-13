@@ -1,36 +1,27 @@
-from danoan.word_guru.cli import exception, utils
+from danoan.word_guru.cli import config
+from danoan.word_guru.cli.commands.setup_commands import init
 
 import argparse
 
 
-def init():
+def print_config(*args, **kwargs):
     try:
-        utils.ensure_environment_variable_exist()
-        utils.ensure_configuration_file_exist()
-    except exception.EnvironmentVariableIsNotSet as ex:
+        config.get_configuration()
+    except:
         print(
-            f"The environment variable {ex.environment_variable} is not set. Please define this variable. It should point to a folder where configuration files will be stored."
+            f"No configuration file found. Create one by calling word-guru setup init or set up the environment variable {config.WORD_GURU_ENV_VARIABLE} to point to a directory where configuration will be stored."
         )
         exit(1)
-    except exception.ConfigurationFileDoesNotExist as ex:
-        print(f"Could not find {ex.configuration_filepath}. Creating an empty one.")
-        ex.configuration_filepath.parent.mkdir(parents=True, exist_ok=True)
-        ex.configuration_filepath.touch()
 
-    return utils.get_configuration_file()
-
-
-def print_config(*args, **kwargs):
-    init()
-    configuration_filepath = utils.ensure_configuration_file_exist()
+    configuration_filepath = config.get_configuration_filepath()
     with open(configuration_filepath, "r") as f:
-        print(f"Contents of: {configuration_filepath}:")
+        print(f"Using configuration file: {configuration_filepath}:\n")
         print(f.read())
 
 
 def extend_parser(subcommand_action=None):
     command_name = "setup"
-    description = "Create or edit configuration file"
+    description = "List or initialize a configuration file"
     help = description
 
     if subcommand_action:
@@ -47,17 +38,10 @@ def extend_parser(subcommand_action=None):
             formatter_class=argparse.RawDescriptionHelpFormatter,
         )
 
+    commands = [init]
+    subparser_action = parser.add_subparsers()
+    for cmd in commands:
+        cmd.extend_parser(subparser_action)
+
     parser.set_defaults(func=print_config, subcommand_help=parser.print_help)
     return parser
-
-
-if __name__ == "__main__":
-    parser = extend_parser()
-    args = parser.parse_args()
-
-    if "func" in args:
-        args.func(**vars(args))
-    elif "subcommand_help" in args:
-        args.subcommand_help()
-    else:
-        parser.print_help()
