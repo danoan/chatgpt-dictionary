@@ -1,4 +1,6 @@
 API Reference
 ======
+
 .. autosummary::
-   :toctree generated
+
+    danoan.word_guru.core

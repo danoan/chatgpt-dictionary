@@ -1,12 +1,12 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>danoan.word_guru namespace &mdash; word-guru 0.2.0 documentation</title>
+  <title>danoan.word_guru namespace &mdash; word-guru 0.3.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=a3d76245" />
@@ -14,9 +14,9 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b1f64a84"></script>
-      <script src="../_static/doctools.js?v=888ff710"></script>
-      <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script src="../_static/documentation_options.js?v=e259d695"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -76,9 +76,9 @@
            <div itemprop="articleBody">
              
   <section id="module-danoan.word_guru">
-<span id="danoan-word-guru-namespace"></span><h1>danoan.word_guru namespace<a class="headerlink" href="#module-danoan.word_guru" title="Permalink to this heading"></a></h1>
+<span id="danoan-word-guru-namespace"></span><h1>danoan.word_guru namespace<a class="headerlink" href="#module-danoan.word_guru" title="Link to this heading"></a></h1>
 <section id="subpackages">
-<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading"></a></h2>
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="danoan.word_guru.cli.html">danoan.word_guru.cli package</a><ul>
@@ -96,19 +96,21 @@
 <li class="toctree-l4"><a class="reference internal" href="danoan.word_guru.cli.cli.html#danoan.word_guru.cli.cli.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="danoan.word_guru.cli.config.html">danoan.word_guru.cli.config module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="danoan.word_guru.cli.config.html#danoan.word_guru.cli.config.get_absolute_configuration_path"><code class="docutils literal notranslate"><span class="pre">get_absolute_configuration_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="danoan.word_guru.cli.config.html#danoan.word_guru.cli.config.get_configuration"><code class="docutils literal notranslate"><span class="pre">get_configuration()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="danoan.word_guru.cli.config.html#danoan.word_guru.cli.config.get_configuration_filepath"><code class="docutils literal notranslate"><span class="pre">get_configuration_filepath()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="danoan.word_guru.cli.config.html#danoan.word_guru.cli.config.get_configuration_folder"><code class="docutils literal notranslate"><span class="pre">get_configuration_folder()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="danoan.word_guru.cli.config.html#danoan.word_guru.cli.config.get_environment_variable_value"><code class="docutils literal notranslate"><span class="pre">get_environment_variable_value()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="danoan.word_guru.cli.exception.html">danoan.word_guru.cli.exception module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="danoan.word_guru.cli.exception.html#danoan.word_guru.cli.exception.ConfigurationFileDoesNotExist"><code class="docutils literal notranslate"><span class="pre">ConfigurationFileDoesNotExist</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="danoan.word_guru.cli.exception.html#danoan.word_guru.cli.exception.EnvironmentVariableIsNotSet"><code class="docutils literal notranslate"><span class="pre">EnvironmentVariableIsNotSet</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="danoan.word_guru.cli.exception.html#danoan.word_guru.cli.exception.ConfigurationFileDoesNotExistError"><code class="docutils literal notranslate"><span class="pre">ConfigurationFileDoesNotExistError</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="danoan.word_guru.cli.exception.html#danoan.word_guru.cli.exception.EnvironmentVariableNotDefinedError"><code class="docutils literal notranslate"><span class="pre">EnvironmentVariableNotDefinedError</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="danoan.word_guru.cli.model.html">danoan.word_guru.cli.model module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="danoan.word_guru.cli.model.html#danoan.word_guru.cli.model.ConfigurationFile"><code class="docutils literal notranslate"><span class="pre">ConfigurationFile</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="danoan.word_guru.cli.utils.html">danoan.word_guru.cli.utils module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="danoan.word_guru.cli.utils.html#danoan.word_guru.cli.utils.ensure_configuration_file_exist"><code class="docutils literal notranslate"><span class="pre">ensure_configuration_file_exist()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="danoan.word_guru.cli.utils.html#danoan.word_guru.cli.utils.ensure_environment_variable_exist"><code class="docutils literal notranslate"><span class="pre">ensure_environment_variable_exist()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="danoan.word_guru.cli.utils.html#danoan.word_guru.cli.utils.get_configuration_file"><code class="docutils literal notranslate"><span class="pre">get_configuration_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="danoan.word_guru.cli.model.html#danoan.word_guru.cli.model.WordGuruConfiguration"><code class="docutils literal notranslate"><span class="pre">WordGuruConfiguration</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -129,11 +131,22 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="danoan.word_guru.core.exception.html">danoan.word_guru.core.exception module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="danoan.word_guru.core.exception.html#danoan.word_guru.core.exception.LanguageCodeNotRecognizedError"><code class="docutils literal notranslate"><span class="pre">LanguageCodeNotRecognizedError</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="danoan.word_guru.core.exception.html#danoan.word_guru.core.exception.OpenAIEmptyResponse"><code class="docutils literal notranslate"><span class="pre">OpenAIEmptyResponse</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="danoan.word_guru.core.exception.html#danoan.word_guru.core.exception.OpenAIEmptyResponseError"><code class="docutils literal notranslate"><span class="pre">OpenAIEmptyResponseError</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="danoan.word_guru.logging_config.html">danoan.word_guru.logging_config module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="danoan.word_guru.logging_config.html#danoan.word_guru.logging_config.setup_logging"><code class="docutils literal notranslate"><span class="pre">setup_logging()</span></code></a></li>
 </ul>
 </li>
 </ul>

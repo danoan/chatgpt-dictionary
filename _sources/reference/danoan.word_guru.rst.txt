@@ -11,3 +11,11 @@ Subpackages
 
    danoan.word_guru.cli
    danoan.word_guru.core
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   danoan.word_guru.logging_config

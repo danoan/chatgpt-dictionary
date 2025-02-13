@@ -1,0 +1,12 @@
+danoan.word\_guru.cli.commands.setup\_commands namespace
+========================================================
+
+.. py:module:: danoan.word_guru.cli.commands.setup_commands
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   danoan.word_guru.cli.commands.setup_commands.init
