@@ -31,19 +31,3 @@ def extend_parser(subcommand_action=None):
     parser.set_defaults(subcommand_help=parser.print_help)
 
     return parser
-
-
-def main():
-    parser = extend_parser()
-
-    args = parser.parse_args()
-    if "func" in args:
-        args.func(**vars(args))
-    elif "subcommand_help" in args:
-        args.subcommand_help()
-    else:
-        parser.print_help()
-
-
-if __name__ == "__main__":
-    main()

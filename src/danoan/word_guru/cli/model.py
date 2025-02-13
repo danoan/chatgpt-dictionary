@@ -1,15 +1,22 @@
 from danoan.toml_dataclass import TomlDataClassIO
 
-from dataclasses import dataclass
+from dataclasses import dataclass, asdict
 from pathlib import Path
 from typing import Optional
 
 
 @dataclass
-class ConfigurationFile(TomlDataClassIO):
+class WordGuruConfiguration(TomlDataClassIO):
     openai_key: Optional[str] = None
-    cache_folder: Optional[Path] = None
+    cache_path: Optional[Path] = None
 
     def __post_init__(self):
-        if self.cache_folder:
-            self.cache_folder = Path(self.cache_folder)
+        if self.cache_path:
+            self.cache_path = Path(self.cache_path)
+
+    def __asdict__(self):
+        d = asdict(self)
+        if self.cache_path:
+            d["cache_path"] = str(self.cache_path)
+
+        return d

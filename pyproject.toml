@@ -20,7 +20,7 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
-dependencies = ["openai", "jinja2", "pycountry", "toml-dataclass"]
+dependencies = ["openai", "jinja2", "pycountry", "toml-dataclass", "llm-assistant @ git+https://github.com/danoan/llm-assistant@v0.5"]
 
 [project.urls]
 Documentation = "https://github.com/danoan/word-guru#readme"

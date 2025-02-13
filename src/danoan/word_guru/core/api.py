@@ -1,89 +1,33 @@
 from danoan.word_guru.core import exception
 
-from hashlib import sha256
-from jinja2 import Environment, PackageLoader
-from openai import OpenAI
 import pycountry
 from typing import Dict, Optional, Any
 from pathlib import Path
+import toml
 
-env = Environment(loader=PackageLoader("danoan.word_guru", package_path="prompts"))
-
-
-def _singleton(cls):
-    instances = {}
-
-    def get_instance(*args, **kwargs):
-        if cls not in instances:
-            instances[cls] = cls(*args, **kwargs)
-        return instances[cls]
-
-    return get_instance
+import importlib.resources as pgk_resources
+from danoan.word_guru import prompts
+from danoan.llm_assistant.runner.core import api as llma
+from danoan.llm_assistant.common.model import RunnerConfiguration, PromptConfiguration
 
 
-@_singleton
-class _Cache:
-    def __init__(self, cache_folder: Path):
-        if cache_folder.exists():
-            self.cache_folder = cache_folder
-            self.cache_folder.mkdir(parents=True, exist_ok=True)
-        else:
-            raise FileNotFoundError()
-
-    def load(self, prompt: str):
-        k = sha256(prompt.encode("utf-8")).hexdigest()
-        cache_file = self.cache_folder / f"{k}.txt"
-        if cache_file.exists():
-            with open(cache_file, "r") as f:
-                return f.read()
-        else:
-            return None
-
-    def save(self, prompt: str, response: str):
-        k = sha256(prompt.encode("utf-8")).hexdigest()
-        cache_file = self.cache_folder / f"{k}.txt"
-        with open(cache_file, "w") as f:
-            f.write(response)
-
-
-def _call_openai(
+def _call_llm(
     openai_key: str,
-    cache_folder: Optional[Path],
+    cache_path: Optional[Path],
     prompt_filename: str,
     prompt_data: Dict[str, Any],
-    content: str,
 ):
-    client = OpenAI(api_key=openai_key)
-    prompt = env.get_template(prompt_filename).render(data=prompt_data)
+    use_cache = cache_path is not None
 
-    cache = None
-    if cache_folder:
-        cache = _Cache(cache_folder)
+    runner_config = RunnerConfiguration(
+        openai_key, "gpt-4o-mini", use_cache, cache_path
+    )
+    llma.LLMAssistant().setup(runner_config)
 
-    response = None
-    cache_query = prompt + content
-    if cache:
-        response = cache.load(cache_query)
+    with pgk_resources.open_text(prompts, prompt_filename) as f:
+        prompt_config = PromptConfiguration(**toml.load(f))
 
-    if not response:
-        completion = client.chat.completions.create(
-            model="gpt-4o",
-            messages=[
-                {"role": "system", "content": prompt},
-                {"role": "user", "content": f"<<{content}>>"},
-            ],
-            top_p=0.1,
-        )
-
-        if len(completion.choices) == 0:
-            return None
-        else:
-            response = completion.choices[0].message.content
-
-        if cache:
-            cache.save(cache_query, response)
-
-    return response
+    return llma.custom(prompt_config, **prompt_data)
 
 
 def _get_language(language_alpha3: str):
@@ -94,7 +38,7 @@ def _get_language(language_alpha3: str):
 
 
 def get_definition(
-    openai_key: str, cache_folder: Optional[Path], word: str, language_alpha3
+    openai_key: str, cache_path: Optional[Path], word: str, language_alpha3
 ) -> str:
     """
     Get the definition of a word.
@@ -105,18 +49,18 @@ def get_definition(
         OpenAIEmptyResponse: If openai return an empty response.
         LanguageCodeNotRecognizedError: If language code is not recognized.
     """
-    prompt_filename = "get-simple-definition.txt"
+    prompt_filename = "word-definition.toml"
     language = _get_language(language_alpha3)
-    data = {"language_name": language.name}
-    text_response = _call_openai(openai_key, cache_folder, prompt_filename, data, word)
-    if not text_response:
+    data = {"language": language.name, "message": word}
+    response = _call_llm(openai_key, cache_path, prompt_filename, data)
+    if not response:
         raise exception.OpenAIEmptyResponse()
 
-    return text_response
+    return response.content
 
 
 def get_synonym(
-    openai_key: str, cache_folder: Optional[Path], word: str, language_alpha3
+    openai_key: str, cache_path: Optional[Path], word: str, language_alpha3
 ) -> str:
     """
     Get the synonyms of a word.
@@ -127,18 +71,18 @@ def get_synonym(
         OpenAIEmptyResponse: If openai return an empty response.
         LanguageCodeNotRecognizedError: If language code is not recognized.
     """
-    prompt_filename = "get-synonym.txt"
+    prompt_filename = "alternative-expression.toml"
     language = _get_language(language_alpha3)
-    data = {"language_name": language.name}
-    text_response = _call_openai(openai_key, cache_folder, prompt_filename, data, word)
-    if not text_response:
+    data = {"language": language.name, "message": word}
+    response = _call_llm(openai_key, cache_path, prompt_filename, data)
+    if not response:
         raise exception.OpenAIEmptyResponse()
 
-    return text_response
+    return response.content
 
 
 def get_reverse_definition(
-    openai_key: str, cache_folder: Optional[Path], text: str, language_alpha3: str
+    openai_key: str, cache_path: Optional[Path], text: str, language_alpha3: str
 ) -> str:
     """
     Get a list of words that best encode the intention of a text.
@@ -149,18 +93,18 @@ def get_reverse_definition(
         OpenAIEmptyResponse: If openai return an empty response.
         LanguageCodeNotRecognizedError: If language code is not recognized.
     """
-    prompt_filename = "get-reverse-definition.txt"
+    prompt_filename = "reverse-definition.toml"
     language = _get_language(language_alpha3)
-    data = {"language_name": language.name}
-    text_response = _call_openai(openai_key, cache_folder, prompt_filename, data, text)
-    if not text_response:
+    data = {"language": language.name, "message": text}
+    response = _call_llm(openai_key, cache_path, prompt_filename, data)
+    if not response:
         raise exception.OpenAIEmptyResponse()
 
-    return text_response
+    return response.content
 
 
 def get_usage_examples(
-    openai_key: str, cache_folder: Optional[Path], word: str, language_alpha3: str
+    openai_key: str, cache_path: Optional[Path], word: str, language_alpha3: str
 ) -> str:
     """
     Get a list of sentences in which the word is used with their different meanings.
@@ -171,18 +115,18 @@ def get_usage_examples(
         OpenAIEmptyResponse: If openai return an empty response.
         LanguageCodeNotRecognizedError: If language code is not recognized.
     """
-    prompt_filename = "get-usage-examples.txt"
+    prompt_filename = "usage-examples.toml"
     language = _get_language(language_alpha3)
-    data = {"language_name": language.name}
-    text_response = _call_openai(openai_key, cache_folder, prompt_filename, data, word)
-    if not text_response:
+    data = {"language": language.name, "message": word}
+    response = _call_llm(openai_key, cache_path, prompt_filename, data)
+    if not response:
         raise exception.OpenAIEmptyResponse()
 
-    return text_response
+    return response.content
 
 
 def get_pos_tag(
-    openai_key: str, cache_folder: Optional[Path], word: str, language_alpha3: str
+    openai_key: str, cache_path: Optional[Path], word: str, language_alpha3: str
 ) -> str:
     """
     Get the part-of-speech tag of the most common uses of the word.
@@ -193,19 +137,19 @@ def get_pos_tag(
         OpenAIEmptyResponse: If openai return an empty response.
         LanguageCodeNotRecognizedError: If language code is not recognized.
     """
-    prompt_filename = "get-pos-tag.txt"
+    prompt_filename = "classify-pos.toml"
     language = _get_language(language_alpha3)
-    data = {"language_name": language.name}
-    text_response = _call_openai(openai_key, cache_folder, prompt_filename, data, word)
-    if not text_response:
+    data = {"language": language.name, "message": word}
+    response = _call_llm(openai_key, cache_path, prompt_filename, data)
+    if not response:
         raise exception.OpenAIEmptyResponse()
 
-    return text_response
+    return response.content
 
 
 def get_translation(
     openai_key: str,
-    cache_folder: Optional[Path],
+    cache_path: Optional[Path],
     word: str,
     from_language_alpha3: str,
     to_language_alpha3: str,
@@ -217,22 +161,23 @@ def get_translation(
         OpenAIEmptyResponse: If openai return an empty response.
         LanguageCodeNotRecognizedError: If language code is not recognized.
     """
-    prompt_filename = "get-translation.txt"
+    prompt_filename = "translate.toml"
     from_language = _get_language(from_language_alpha3)
     to_language = _get_language(to_language_alpha3)
     data = {
-        "from_language_name": from_language.name,
-        "to_language_name": to_language.name,
+        "from_language": from_language.name,
+        "to_language": to_language.name,
+        "message": word,
     }
-    text_response = _call_openai(openai_key, cache_folder, prompt_filename, data, word)
-    if not text_response:
+    response = _call_llm(openai_key, cache_path, prompt_filename, data)
+    if not response:
         raise exception.OpenAIEmptyResponse()
 
-    return text_response
+    return response.content
 
 
 def get_correction(
-    openai_key: str, cache_folder: Optional[Path], word: str, language_alpha3: str
+    openai_key: str, cache_path: Optional[Path], word: str, language_alpha3: str
 ) -> str:
     """
     Get the corrected version of a text.
@@ -241,11 +186,11 @@ def get_correction(
         OpenAIEmptyResponse: If openai return an empty response.
         LanguageCodeNotRecognizedError: If language code is not recognized.
     """
-    prompt_filename = "get-correction.txt"
+    prompt_filename = "correct-text.toml"
     language = _get_language(language_alpha3)
-    data = {"language_name": language.name}
-    text_response = _call_openai(openai_key, cache_folder, prompt_filename, data, word)
-    if not text_response:
+    data = {"language": language.name, "message": word}
+    response = _call_llm(openai_key, cache_path, prompt_filename, data)
+    if not response:
         raise exception.OpenAIEmptyResponse()
 
-    return text_response
+    return response.content

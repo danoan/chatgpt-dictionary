@@ -15,7 +15,7 @@ logger.addHandler(handler)
 
 def get_reverse_definition(
     openai_key: str,
-    cache_folder: Optional[str],
+    cache_path: Optional[str],
     text: str,
     language: str,
     *args,
@@ -24,18 +24,8 @@ def get_reverse_definition(
     """
     Get a list of words that best encodes a given text.
     """
-    if cache_folder:
-        cache_folder_path = Path(cache_folder)
-        if not cache_folder_path.exists():
-            logger.error(
-                "The given cache folder does not exist. Create one before proceeding."
-            )
-            exit(1)
-    else:
-        cache_folder_path = None
-
     try:
-        print(api.get_reverse_definition(openai_key, cache_folder_path, text, language))
+        print(api.get_reverse_definition(openai_key, cache_path, text, language))
     except exception.OpenAIEmptyResponse:
         logger.error("OpeanAI returned an empty response.")
 
@@ -69,19 +59,3 @@ def extend_parser(subcommand_action=None):
     parser.set_defaults(func=get_reverse_definition, subcommand_help=parser.print_help)
 
     return parser
-
-
-def main():
-    parser = extend_parser()
-
-    args = parser.parse_args()
-    if "func" in args:
-        args.func(**vars(args))
-    elif "subcommand_help" in args:
-        args.subcommand_help()
-    else:
-        parser.print_help()
-
-
-if __name__ == "__main__":
-    main()
