@@ -32,6 +32,6 @@ jobs:
         with:
           name: sdist-artifact
           path: ./dist/
-      - uses: pypa/gh-action-pypi-publish@v1.8.14
+      - uses: pypa/gh-action-pypi-publish@v1.12.4
         # with:
         #   repository_url: https://test.pypi.org/legacy/
